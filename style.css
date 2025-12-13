@@ -268,8 +268,7 @@ body {
   padding: 12px 24px;
   border-radius: 10px;
   font-weight: bold;
-  pointer-events: none; /* важно! */
-  z-index: 10;
+  z-index: 1000;
   backdrop-filter: blur(2px);
 }
 

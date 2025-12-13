@@ -31,10 +31,6 @@ const checkBtn = document.getElementById("check-btn");
 const resetBtn = document.getElementById("reset-btn");
 const hintBtn = document.getElementById("hint-btn");
 const taskDescription = document.getElementById("task-description");
-const calculationSection = document.getElementById("calculation-section");
-const calculationInput = document.getElementById("calculation-input");
-const submitCalculation = document.getElementById("submit-calculation");
-const successAnimation = document.getElementById("success-animation");
 const grid = document.getElementById("grid");
 
 function initializeGrid() {
@@ -153,38 +149,37 @@ function openParameterModal(elementType, cellIndex) {
   console.log(target.property, elementType);
 }
 
+const deleteZone = document.getElementById("delete-zone");
+  deleteZone.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+  });
+  
+  deleteZone.addEventListener("drop", (e) => {
+    e.preventDefault();
+    const elementType = e.dataTransfer.getData("text/plain");
+    const oldIndex = e.dataTransfer.getData("oldCellIndex");
+    
+    if (oldIndex) {
+      const idx = gameState.placedElements.findIndex((c) => c.cell == oldIndex);
+      if (idx !== -1) {
+        gameState.placedElements.splice(idx, 1);
+      }
+      const oldCell = document.querySelector(`[data-index="${oldIndex}"]`);
+      if (oldCell) {
+        oldCell.innerHTML = "";
+      }
+      
+      showNotification(`Элемент удалён`, "success");
+    }
+    
+    deleteZone.style.display = "none";
+  });
+
 grid.addEventListener("dragover", (e) => {
   e.preventDefault();
   e.dataTransfer.dropEffect = "copy";
   document.getElementById("delete-zone").style.display = "block";
-});
-
-document.getElementById("delete-zone").addEventListener("dragover", (e) => {
-  e.preventDefault();
-  e.dataTransfer.dropEffect = "move";
-  e.target.style.background = "rgba(220, 53, 69, 0.5)";
-});
-
-document.getElementById("delete-zone").addEventListener("dragleave", (e) => {
-  e.target.style.background = "rgba(220, 53, 69, 0.3)";
-});
-
-document.getElementById("delete-zone").addEventListener("drop", (e) => {
-  e.preventDefault();
-  e.target.style.background = "rgba(220, 53, 69, 0.3)";
-  
-  const oldIndex = e.dataTransfer.getData("oldCellIndex");
-  if (oldIndex) {
-    const idx = gameState.placedElements.findIndex(c => c.cell == oldIndex);
-    if (idx !== -1) {
-      gameState.placedElements.splice(idx, 1);
-    }
-    const oldCell = document.querySelector(`[data-index="${oldIndex}"]`);
-    if (oldCell) oldCell.innerHTML = "";
-    
-    showNotification("Элемент удалён", "success");
-  }
-  e.target.style.display = "none";
 });
 
 grid.addEventListener("drop", (e) => {
