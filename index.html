@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="./assets/bulb_active.png"
+      type="image/x-icon"
+    />
+    <title>Электрические схемы - Игра</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Auth Screen -->
+      <div id="auth-screen">
+        <h1>⚡ Электрические схемы</h1>
+        <input
+          type="text"
+          id="nickname"
+          placeholder="Введите ваш никнейм"
+          maxlength="20"
+        />
+        <button id="start-game">Начать игру</button>
+        <button id="show-leaderboard" style="margin-top: 15px">
+          🏆 Рейтинг
+        </button>
+      </div>
+
+      <!-- Game Screen -->
+      <div id="game-screen">
+        <div class="game-header">
+          <div class="stats">
+            <div class="stat-box">
+              <h3>Уровень</h3>
+              <p id="current-level">1</p>
+            </div>
+            <div class="stat-box">
+              <h3>Очки</h3>
+              <p id="score">0</p>
+            </div>
+            <div class="stat-box">
+              <h3>Время</h3>
+              <p id="timer">180</p>
+            </div>
+            <div class="stat-box">
+              <h3>Попытки</h3>
+              <p id="attempts">3</p>
+            </div>
+          </div>
+          <div class="game-controls">
+            <button class="btn btn-primary" id="check-btn">Проверить</button>
+            <button class="btn btn-secondary" id="reset-btn">Сбросить</button>
+            <button class="btn btn-danger" id="hint-btn">Подсказка</button>
+            <button class="btn btn-secondary" id="level-select">Уровни</button>
+            <button class="btn btn-danger" id="exit-game">Выйти</button>
+          </div>
+        </div>
+        <div class="game-layout">
+          <div class="workspace-and-task">
+            <div class="workspace" id="workspace">
+              <div class="grid" id="grid"></div>
+              <div id="delete-zone" class="delete-zone">🗑️ Удалить</div>
+            </div>
+            <div class="task-display">
+              <h3>Задание</h3>
+              <p id="task-description">...</p>
+            </div>
+          </div>
+          <div class="elements-panel" id="elements-panel">
+            <!-- Динамически заполняется -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Success Animation -->
+      <div class="success-animation" id="success-animation">
+        <h2>Отлично!</h2>
+      </div>
+      <div id="notification" class="notification" style="display: none"></div>
+    </div>
+    <!-- Parameter Modal -->
+    <div id="parameter-modal" class="modal" style="display: none">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modal-title">Параметр</h3>
+          <span class="close">&times;</span>
+        </div>
+        <img id="param-img" src="" alt="" width="200" />
+        <div>
+          <input
+            type="number"
+            class="modal-input"
+            id="param-value"
+            step="0.01"
+            placeholder="Значение"
+          />
+          <span id="param-unit"></span>
+        </div>
+        <button id="save-param" class="save-button">Сохранить</button>
+      </div>
+    </div>
+    <!-- Help Modal -->
+    <div id="help-modal" class="modal" style="display: none">
+      <div class="help-modal-content modal-content">
+        <div class="modal-header">
+          <h2>Справка по игре</h2>
+          <span class="close">&times;</span>
+        </div>
+
+        <h3>🎯 Цель</h3>
+        <p>Собирайте электрические цепи и решайте расчётные задачи.</p>
+
+        <h3>⚡ Элементы</h3>
+        <ul>
+          <li>
+            <strong
+              >Батарейка
+              <img src="./assets/power.png" width="30px" alt="battery"
+            /></strong>
+            — источник напряжения
+          </li>
+          <li>
+            <strong
+              >Лампочка <img src="./assets/bulb.png" width="30px" alt="bulb"
+            /></strong>
+            — индикатор замкнутой цепи
+          </li>
+          <li>
+            <strong
+              >Резистор
+              <img src="./assets/resistor.png" width="30px" alt="resistor"
+            /></strong>
+            — ограничивает ток
+          </li>
+          <li>
+            <strong
+              >Ключ <img src="./assets/switch.png" width="30px" alt="switch"
+            /></strong>
+            — кликните, чтобы включить/выключить
+          </li>
+          <li>
+            <strong
+              >Провода
+              <img src="./assets/wire_corner_bl.png" width="30px" alt="wire"
+            /></strong>
+            — соединяют элементы
+          </li>
+        </ul>
+
+        <h3>🧮 Формулы</h3>
+        <p><strong>Закон Ома:</strong> I = U / R</p>
+        <p><strong>Последовательное соединение:</strong> R = R₁ + R₂ + ...</p>
+
+        <h3>🏆 Баллы</h3>
+        <ul>
+          <li>База: 50 баллов за сборку</li>
+          <li>+30 за расчёт</li>
+          <li>Бонус за время: до 20 баллов</li>
+          <li>Бонус за попытки: +10 за каждую оставшуюся</li>
+        </ul>
+
+        <h3>📚 Уровни</h3>
+        <p>
+          1. Собрать простую схему по описанию.<br />
+          2. Собрать схему и внести параметр (Напряжение/Сила
+          тока/Сопротивление) по Закону Ома.<br />
+          3. Собрать схему по диаграмме и решить задачу.
+        </p>
+      </div>
+    </div>
+    <!-- Leaderboard Modal -->
+    <div id="leaderboard-modal" class="modal" style="display: none">
+      <div class="modal-content" style="max-height: 80vh; overflow-y: auto">
+        <span class="close">&times;</span>
+        <h2>🏆 Рейтинг игроков</h2>
+        <div id="leaderboard-content">
+          <p>Пока нет записей.</p>
+        </div>
+      </div>
+    </div>
+    <script src="./js/main.js" type="module"></script>
+  </body>
+</html>
