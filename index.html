@@ -12,20 +12,24 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <div class="auth-background" id="auth-background"></div>
     <div class="container">
       <!-- Auth Screen -->
       <div id="auth-screen">
-        <h1>⚡ Электрические схемы</h1>
-        <input
-          type="text"
-          id="nickname"
-          placeholder="Введите ваш никнейм"
-          maxlength="20"
-        />
-        <button id="start-game">Начать игру</button>
-        <button id="show-leaderboard" style="margin-top: 15px">
-          🏆 Рейтинг
-        </button>
+        <div class="auth-background" id="auth-background"></div>
+        <div class="auth-content">
+          <h1>⚡ Электрические схемы</h1>
+          <input
+            type="text"
+            id="nickname"
+            placeholder="Введите ваш никнейм"
+            maxlength="20"
+          />
+          <button id="start-game">Начать игру</button>
+          <button id="show-leaderboard" style="margin-top: 15px">
+            🏆 Рейтинг
+          </button>
+        </div>
       </div>
 
       <!-- Game Screen -->
@@ -168,16 +172,32 @@
           тока/Сопротивление) по Закону Ома.<br />
           3. Собрать схему по диаграмме и решить задачу.
         </p>
+        <h3>🎮 Управление</h3>
+        <p>
+          1. <b>Drag&Drop</b> для перетаскивания элементов на сетку.<br />
+          2. <b>ПКМ</b> для удаления элемента с сетки.<br />
+          3. <b>Пробел</b> для сброса всех элементов на сетке.
+        </p>
       </div>
     </div>
-    <!-- Leaderboard Modal -->
-    <div id="leaderboard-modal" class="modal" style="display: none">
-      <div class="modal-content" style="max-height: 80vh; overflow-y: auto">
-        <span class="close">&times;</span>
-        <h2>🏆 Рейтинг игроков</h2>
-        <div id="leaderboard-content">
-          <p>Пока нет записей.</p>
-        </div>
+    <!-- Leaderboard Screen -->
+    <div id="leaderboard-screen" style="display: none">
+      <div class="leaderboard-header">
+        <h1>🏆 Таблица рекордов</h1>
+        <button id="back-to-auth" class="btn btn-primary">← Назад</button>
+      </div>
+      <div class="leaderboard-table">
+        <table id="leaderboard-table">
+          <thead>
+            <tr>
+              <th>Игрок</th>
+              <th>Очки</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body">
+            <!-- Заполнится JS -->
+          </tbody>
+        </table>
       </div>
     </div>
     <script src="./js/main.js" type="module"></script>

@@ -190,7 +190,7 @@ export const levels = {
     task: `Соберите цепь по схеме и введите силу тока.<br>
            <small>Формула: I = U / (R₁ + R₂)<br>
            Дано на схеме: U = 12 В, R₁ = 100 Ом, R₂ = 200 Ом</small><br>
-           <img src="./assets/schemas/schema3a.png" style="width:280px; margin-top:8px;">`,
+           <img src="./assets/schemas/schema3a.png" style="width:300px; margin-top:8px;">`,
     layout: {
       type: "series",
       elements: ["power", "resistor", "resistor", "bulb"],
@@ -223,7 +223,7 @@ export const levels = {
     task: `Соберите цепь по схеме и введите напряжение источника.<br>
            <small>Формула: U = I × (R₁ + R₂ + R₃)<br>
            Дано на схеме: I = 0.3 А, R₁ = 10 Ом, R₂ = 20 Ом, R₃ = 20 Ом</small><br>
-           <img src="./assets/schemas/schema3b.png" style="width:280px; margin-top:8px;">`,
+           <img src="./assets/schemas/schema3b.png" style="width:300px; margin-top:8px;">`,
     layout: {
       type: "series",
       elements: ["power", "resistor", "resistor", "resistor", "bulb"],
@@ -257,7 +257,7 @@ export const levels = {
     task: `Соберите цепь по схеме и введите сопротивление первого резистора.<br>
            <small>Формула: R₁ = (U / I) − R₂<br>
            Дано на схеме: U = 12 В, I = 0.08 А, R₂ = 50 Ом</small><br>
-           <img src="./assets/schemas/schema3c.png" style="width:280px; margin-top:8px;">`,
+           <img src="./assets/schemas/schema3c.png" style="width:300px; margin-top:8px;">`,
     layout: {
       type: "series",
       elements: ["power", "switch", "resistor", "resistor", "bulb", "bulb"],
