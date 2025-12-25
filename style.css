@@ -36,6 +36,7 @@ body {
   height: 100vh;
   z-index: 1;
   pointer-events: none;
+  perspective: 1000px;
 }
 
 #auth-screen {
@@ -74,6 +75,7 @@ body {
   pointer-events: none;
   z-index: 0;
   transition: transform 0.3s ease-out;
+  transform-style: preserve-3d;
 }
 
 #auth-screen h1 {
