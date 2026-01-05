@@ -134,7 +134,7 @@ grid.addEventListener("drop", (e) => {
   element.draggable = true;
 
   const img = document.createElement("img");
-  img.src = `./assets/${elementType}.png`;
+  img.src = `./assets/${elementType}.webp`;
   img.className = "element-img";
   element.appendChild(img);
 
@@ -149,8 +149,8 @@ grid.addEventListener("drop", (e) => {
       element.classList.toggle("off", isOn);
       img.src =
         newStatus === "on"
-          ? "./assets/switch_active.png"
-          : "./assets/switch.png";
+          ? "./assets/switch_active.webp"
+          : "./assets/switch.webp";
       const placed = gameState.placedElements.find((p) => p.cell === newIndex);
       if (placed) placed.state = newStatus;
     });
@@ -193,7 +193,7 @@ function openParameterModal(elementType, cellIndex) {
 
   const modal = document.getElementById("parameter-modal");
   modal.style.display = "block";
-  document.getElementById("param-img").src = `./assets/${elementType}.png`;
+  document.getElementById("param-img").src = `./assets/${elementType}.webp`;
   document.getElementById("modal-title").textContent =
     {
       current: "Сила тока",

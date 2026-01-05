@@ -40,7 +40,7 @@ export function renderElementsPanel(availableElements) {
     el.draggable = true;
 
     const img = document.createElement("img");
-    img.src = `./assets/${type}.png`;
+    img.src = `./assets/${type}.webp`;
     img.alt = type;
     img.onerror = () => {
       img.remove();
@@ -99,7 +99,7 @@ export function activateBulb(el) {
   const img = el.querySelector("img");
   if (img) {
     if (!img.dataset.originalSrc) img.dataset.originalSrc = img.src;
-    img.src = "./assets/bulb_active.png";
+    img.src = "./assets/bulb_active.webp";
     el.classList.add("on");
   }
 }
