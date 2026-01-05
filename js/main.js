@@ -1,4 +1,3 @@
-// main.js
 import { levels } from "./levels.js";
 import { gameState, resetGameState, GRID_COLS } from "./gameState.js";
 import { loadNickname, saveNickname, savePlayerScore } from "./storage.js";
@@ -208,7 +207,7 @@ function openParameterModal(elementType, cellIndex) {
 
 // === СБРОС ПО ПРОБЕЛУ ===
 document.addEventListener("keydown", (e) => {
-  if (e.code === "Space") {
+  if (e.code === "Space" && gameState.currentVariation) {
     e.preventDefault();
     handleReset();
   }
