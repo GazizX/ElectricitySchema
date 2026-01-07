@@ -1,13 +1,14 @@
+ESchema_localStorage = localStorage;
 function saveNickname(nickname) {
-  localStorage.setItem("electricGameNickname", nickname);
+  ESchema_localStorage.setItem("electricGameNickname", nickname);
 }
 
 function loadNickname() {
-  return localStorage.getItem("electricGameNickname");
+  return ESchema_localStorage.getItem("electricGameNickname");
 }
 
 function savePlayerScore(nickname, finalScore) {
-  const leaderboard = JSON.parse(localStorage.getItem("electricGameLeaderboard") || "[]");
+  const leaderboard = JSON.parse(ESchema_localStorage.getItem("electricGameLeaderboard") || "[]");
   
   const existingPlayer = leaderboard.find(player => player.nickname === nickname);
   
@@ -25,15 +26,15 @@ function savePlayerScore(nickname, finalScore) {
   }
 
   leaderboard.sort((a, b) => b.score - a.score);
-  localStorage.setItem("electricGameLeaderboard", JSON.stringify(leaderboard));
+  ESchema_localStorage.setItem("electricGameLeaderboard", JSON.stringify(leaderboard));
 }
 
 function saveAttempt(attempt) {
-  const attempts = JSON.parse(localStorage.getItem("electricGameAttempts") || "[]");
+  const attempts = JSON.parse(ESchema_localStorage.getItem("electricGameAttempts") || "[]");
   attempts.push(attempt);
-  localStorage.setItem("electricGameAttempts", JSON.stringify(attempts));
+  ESchema_localStorage.setItem("electricGameAttempts", JSON.stringify(attempts));
 }
 
 function loadLeaderboard() {
-  return JSON.parse(localStorage.getItem("electricGameLeaderboard") || "[]");
+  return JSON.parse(ESchema_localStorage.getItem("electricGameLeaderboard") || "[]");
 }
