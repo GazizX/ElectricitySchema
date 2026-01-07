@@ -1,13 +1,10 @@
-import { gameState } from './gameState.js';
-import { findPathBetween } from './utils.js';
-import { GRID_COLS } from './gameState.js';
 const NON_COMPONENT_TYPES = new Set([
   "power", "wire_h", "wire_v",
   "wire_corner_bl", "wire_corner_tl",
   "wire_corner_tr", "wire_corner_br", "wire"
 ]);
 
-export function checkAssemblySilent() {
+function checkAssemblySilent() {
   const variation = gameState.currentVariation;
   if (!variation) return { valid: false, reason: "Ошибка: уровень не загружен" };
   if (variation.layout.type !== "series") return { valid: false, reason: "Только последовательные цепи" };
@@ -31,7 +28,7 @@ export function checkAssemblySilent() {
   return validateSeriesCircuit(cellsMap, GRID_COLS, powerInfo);
 }
 
-export function validateSeriesCircuit(cellsMap, cols, powerInfo) {
+function validateSeriesCircuit(cellsMap, cols, powerInfo) {
   const topIndex = powerInfo.index - cols;
   const bottomIndex = powerInfo.index + cols;
 
@@ -75,7 +72,7 @@ export function validateSeriesCircuit(cellsMap, cols, powerInfo) {
   return { valid: true };
 }
 
-export function checkCalculation() {
+function checkCalculation() {
   const variation = gameState.currentVariation;
   if (!variation?.parameters) return { valid: true };
 
@@ -100,7 +97,7 @@ export function checkCalculation() {
   }
 }
 
-export function calculateLevelScore() {
+function calculateLevelScore() {
   const variation = gameState.currentVariation;
   let levelScore = 50;
   if (variation.parameters) levelScore += 30;

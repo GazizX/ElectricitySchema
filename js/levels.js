@@ -1,5 +1,4 @@
-// Updated levels.js with interactive parameters and clear tasks
-export const levels = {
+const levels = {
   level1: [
     {
       id: "1a",

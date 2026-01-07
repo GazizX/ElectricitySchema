@@ -1,31 +1,3 @@
-import { levels } from "./levels.js";
-import { gameState, resetGameState, GRID_COLS } from "./gameState.js";
-import { loadNickname, saveNickname, savePlayerScore } from "./storage.js";
-import {
-  initializeGrid,
-  renderElementsPanel,
-  updateTimerUI,
-  updateAttemptsUI,
-  updateScoreUI,
-  updateLevelUI,
-  updateTaskDescription,
-  showNotification,
-  showScreen,
-  showConfirm,
-  showLevelCompleteModal,
-  highlightInputElement,
-  showLevelSelectModal,
-  renderLeaderboard,
-  animateElectricFlow,
-} from "./ui.js";
-import {
-  checkAssemblySilent,
-  checkCalculation,
-  calculateLevelScore,
-} from "./gameLogic.js";
-import { findPathBetween } from "./utils.js";
-
-// Кэшируем DOM
 const nicknameInput = document.getElementById("nickname");
 const startGameBtn = document.getElementById("start-game");
 const checkBtn = document.getElementById("check-btn");
@@ -42,7 +14,7 @@ function getLevelVariations(levelNum) {
   return levels[`level${levelNum}`] || [];
 }
 
-export function loadLevel(levelNum) {
+function loadLevel(levelNum) {
   const variations = getLevelVariations(levelNum);
   if (variations.length === 0) {
     showNotification(`Уровень ${levelNum} не найден.`, "error");

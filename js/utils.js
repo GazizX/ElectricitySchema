@@ -1,4 +1,4 @@
-export function getElementDirections(type) {
+function getElementDirections(type) {
   switch (type) {
     case "power":
       return [0, 2]; 
@@ -24,7 +24,7 @@ export function getElementDirections(type) {
   }
 }
 
-export function areCellsConnected(cellA, indexA, cellB, indexB, cols) {
+function areCellsConnected(cellA, indexA, cellB, indexB, cols) {
   const rowA = Math.floor(indexA / cols);
   const colA = indexA % cols;
   const rowB = Math.floor(indexB / cols);
@@ -45,7 +45,7 @@ export function areCellsConnected(cellA, indexA, cellB, indexB, cols) {
   return dirsA.includes(dirAtoB) && dirsB.includes(dirBtoA);
 }
 
-export function getGridNeighbors(index, totalCells, cols) {
+function getGridNeighbors(index, totalCells, cols) {
   const neighbors = [];
   if (index - cols >= 0) neighbors.push(index - cols); 
   if (index + cols < totalCells) neighbors.push(index + cols); 
@@ -54,7 +54,7 @@ export function getGridNeighbors(index, totalCells, cols) {
   return neighbors;
 }
 
-export function findPathBetween(
+function findPathBetween(
   startIndex,
   endIndex,
   cellsMap,
@@ -84,7 +84,7 @@ export function findPathBetween(
   return null; 
 }
 
-export function getParameterName(name) {
+function getParameterName(name) {
   const name_ru = name === 'voltage' ? "Напряжение" : name === 'resistance' ? "Сопротивление" : "Сила тока";
   return name_ru;
 }

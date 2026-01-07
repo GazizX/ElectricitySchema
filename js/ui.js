@@ -1,12 +1,8 @@
-import { gameState, GRID_COLS, TOTAL_CELLS } from "./gameState.js";
-import { loadLeaderboard } from "./storage.js";
-
-// DOM-элементы
 const scoreEl = document.getElementById("score");
 const timerEl = document.getElementById("timer");
 const attemptsEl = document.getElementById("attempts");
 
-export function initializeGrid() {
+function initializeGrid() {
   const grid = document.getElementById("grid");
   grid.innerHTML = "";
   for (let i = 0; i < TOTAL_CELLS; i++) {
@@ -17,7 +13,7 @@ export function initializeGrid() {
   }
 }
 
-export function renderElementsPanel(availableElements) {
+function renderElementsPanel(availableElements) {
   const panel = document.getElementById("elements-panel");
   panel.innerHTML = "";
 
@@ -59,7 +55,7 @@ export function renderElementsPanel(availableElements) {
   }
 }
 
-export function formatTime(seconds) {
+function formatTime(seconds) {
   const mins = Math.floor(seconds / 60);
   const secs = seconds % 60;
   return `${mins.toString().padStart(2, "0")}:${secs
@@ -67,27 +63,27 @@ export function formatTime(seconds) {
     .padStart(2, "0")}`;
 }
 
-export function updateTimerUI() {
+function updateTimerUI() {
   timerEl.textContent = formatTime(gameState.timeLeft);
 }
 
-export function updateAttemptsUI() {
+function updateAttemptsUI() {
   attemptsEl.textContent = gameState.attemptsLeft;
 }
 
-export function updateScoreUI() {
+function updateScoreUI() {
   scoreEl.textContent = gameState.score;
 }
 
-export function updateLevelUI(level) {
+function updateLevelUI(level) {
   document.getElementById("current-level").textContent = level;
 }
 
-export function updateTaskDescription(task) {
+function updateTaskDescription(task) {
   document.getElementById("task-description").innerHTML = task;
 }
 
-export function showNotification(message, type = "error") {
+function showNotification(message, type = "error") {
   const notif = document.getElementById("notification");
   notif.textContent = message;
   notif.className = `notification ${type}`;
@@ -95,7 +91,7 @@ export function showNotification(message, type = "error") {
   setTimeout(() => (notif.style.display = "none"), 3000);
 }
 
-export function activateBulb(el) {
+function activateBulb(el) {
   const img = el.querySelector("img");
   if (img) {
     if (!img.dataset.originalSrc) img.dataset.originalSrc = img.src;
@@ -104,7 +100,7 @@ export function activateBulb(el) {
   }
 }
 
-export function showScreen(screenId) {
+function showScreen(screenId) {
   document.getElementById("auth-screen").style.display = "none";
   document.getElementById("game-screen").style.display = "none";
   document.getElementById("leaderboard-screen").style.display = "none";
@@ -116,7 +112,7 @@ export function showScreen(screenId) {
   document.getElementById(`${screenId}-screen`).style.display = "block";
 }
 
-export function renderLeaderboard() {
+function renderLeaderboard() {
   const leaderboard = loadLeaderboard();
   const tbody = document.getElementById("leaderboard-body");
 
@@ -137,7 +133,7 @@ export function renderLeaderboard() {
   tbody.innerHTML = html;
 }
 
-export function showConfirm(message, onConfirm, onCancel) {
+function showConfirm(message, onConfirm, onCancel) {
   const confirmDiv = document.createElement("div");
   confirmDiv.className = "modal";
   confirmDiv.innerHTML = `
@@ -174,7 +170,7 @@ export function showConfirm(message, onConfirm, onCancel) {
   closeBtn.addEventListener("click", cleanup);
 }
 
-export function showLevelCompleteModal(onRetry, onNextLevel) {
+function showLevelCompleteModal(onRetry, onNextLevel) {
   const modal = document.createElement("div");
   modal.className = "modal";
   modal.innerHTML = `
@@ -202,7 +198,7 @@ export function showLevelCompleteModal(onRetry, onNextLevel) {
   });
 }
 
-export function showLevelSelectModal(currentLevel, onSelect) {
+function showLevelSelectModal(currentLevel, onSelect) {
   const modal = document.createElement("div");
   modal.className = "modal";
   modal.innerHTML = `
@@ -241,7 +237,7 @@ export function showLevelSelectModal(currentLevel, onSelect) {
   });
 }
 
-export function highlightInputElement(elementType) {
+function highlightInputElement(elementType) {
   document.querySelectorAll(".placed-element.highlight").forEach((el) => {
     el.classList.remove("highlight");
   });
@@ -254,7 +250,7 @@ export function highlightInputElement(elementType) {
   }
 }
 
-export function animateElectricFlow(path) {
+function animateElectricFlow(path) {
   path.forEach((cellIndex, i) => {
     setTimeout(() => {
       const cell = document.querySelector(
